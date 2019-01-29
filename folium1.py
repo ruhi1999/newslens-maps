@@ -10,8 +10,6 @@ place_file = open("places_23000.json")
 place_data = json.load(place_file)
 
 geolocator = Nominatim(user_agent = "NewsLens")
-
-mapper = folium.Map(location=[45.5236, -122.6750])
 topic = "2300"
 
 def color(count):
