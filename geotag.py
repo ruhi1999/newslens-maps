@@ -3,7 +3,7 @@ import csv, os, json
 
 class Geotag():
     def __init__(self):
-        self.nl_root = os.environ['newslens_root']
+  #      self.nl_root = os.environ['newslens_root']
         self.create_structures()
     
     def tsv_read(self, f, keys):
@@ -15,10 +15,10 @@ class Geotag():
 
     def create_structures(self):
         
-        with open(self.nl_root+"common/data/geo_countries.tsv", "rb") as f:   self.countries = self.tsv_read(f, ["ISO", "ISO3", "ISO-Numeric", "fips", "name", "Capital", "Area(in sq km)", "Population", "Continent", "tld", "CurrencyCode", "CurrencyName", "Phone", "Postal Code Format", "Postal Code Regex", "Languages", "geonameid", "neighbours", "EquivalentFipsCode"])
-        with open(self.nl_root+"common/data/geo_admin1.tsv", "rb") as f:      self.admin1 = self.tsv_read(f, ["geotext", "name", "asciiname", "geonameid"])
-        with open(self.nl_root+"common/data/geo_admin2.tsv", "rb") as f:      self.admin2 = self.tsv_read(f, ["geotext", "name", "asciiname", "geonameid"])
-        with open(self.nl_root+"common/data/geo_cities15000.tsv", "rb") as f: self.cities = self.tsv_read(f, ["geonameid", "name", "asciiname", "alternatenames", "latitude", "longitude", "feature class", "feature code", "country code", "cc2", "admin1 code", "admin2 code", "admin3 code", "admin4 code", "population", "elevation", "dem", "timezone", "modification date"])
+        with open("./data/geo_countries.tsv", "r") as f:   self.countries = self.tsv_read(f, ["ISO", "ISO3", "ISO-Numeric", "fips", "name", "Capital", "Area(in sq km)", "Population", "Continent", "tld", "CurrencyCode", "CurrencyName", "Phone", "Postal Code Format", "Postal Code Regex", "Languages", "geonameid", "neighbours", "EquivalentFipsCode"])
+        with open("./data/geo_admin1.tsv", "r") as f:      self.admin1 = self.tsv_read(f, ["geotext", "name", "asciiname", "geonameid"])
+        with open("./data/geo_admin2.tsv", "r") as f:      self.admin2 = self.tsv_read(f, ["geotext", "name", "asciiname", "geonameid"])
+        with open("./data/geo_cities15000.tsv", "r") as f: self.cities = self.tsv_read(f, ["geonameid", "name", "asciiname", "alternatenames", "latitude", "longitude", "feature class", "feature code", "country code", "cc2", "admin1 code", "admin2 code", "admin3 code", "admin4 code", "population", "elevation", "dem", "timezone", "modification date"])
 
         self.all_names = Counter()
 
