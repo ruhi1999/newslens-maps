@@ -13,7 +13,7 @@ from geopy.geocoders import Nominatim
 class mapper:
     def __init__(self, topic):
         self.topic = topic
-        self.path = ("./topics/" + self.topic)
+        self.path = ("../topics/" + self.topic)
         place_file = open(path)
         self.place_data = json.load(place_file)
         self.geolocator = Nominatim(user_agent = "NewsLens")

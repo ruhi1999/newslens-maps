@@ -7,10 +7,10 @@ import os
 class shp2geojson:
     def __init__(self, topic):
         self.topic = topic
-        self.path = ("./topics/" + self.topic)
+        self.path = ("../topics/" + self.topic)
 
-    def get_shp(self):
-        shp_files = self.path+"/shp-files"
+    def get_geo(self, simplif=0.3):
+        shp_files = self.path+"/shp"
         for shp in os.listdir(shp_files):
             if "shp" in shp and "0" in shp:
-                print(subprocess.check_output(["mapshaper", shp_files+"/"+shp, "-simplify", "0.3%", "-o", "format=geojson", path+"/geojsons/"+shp+".json"]))
+                print(subprocess.check_output(["mapshaper", shp_files+"/"+shp, "-simplify", simplif+"%", "-o", "format=geojson", path+"/geojsons/"+shp+".json"]))

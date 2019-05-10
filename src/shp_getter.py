@@ -5,9 +5,10 @@ import json
 import folium
 import pandas
 import requests
+import os
 from bs4 import BeautifulSoup
 import urllib.request
-import geotag
+from .geotag import Geotag
 import zipfile
 from xml.dom import minidom
 
@@ -15,13 +16,17 @@ from xml.dom import minidom
 
 
 class shp_getter:
-    def __init__(self,topic_file):
+    def __init__(self,topic_file,topic):
         self.place_file = open(topic_file)
-        self.places = json.load(place_file)
-        self.path = ("./topics/" + topic)
-        os.mkdir(path)
-        os.mkdir(path + "/shp")
-        os.mkdir(path + "/shp-zipped")
+        self.places = json.load(self.place_file)
+        self.path = ("../topics/" + topic)
+
+        if not os.path.exists(self.path):
+            os.mkdir(self.path)
+        if not os.path.exists(self.path + "/shp"):
+            os.mkdir(self.path + "/shp")
+        if not os.path.exists(self.path + "/shp-zipped"):
+            os.mkdir(self.path + "/shp-zipped")
 
     def get_shp(self):
 
@@ -43,7 +48,7 @@ class shp_getter:
                     count = chr(ord(count) + 1)
             country_codes.update({name: (a_tag['href'][5:8])})
 
-        GT = geotag.Geotag()
+        GT = Geotag()
         place_names = []
 
         for place in places:
