@@ -28,8 +28,8 @@ class shp_getter:
         if not os.path.exists(self.path + "/shp-zipped"):
             os.mkdir(self.path + "/shp-zipped")
 
-    def get_shp(self):
 
+    def get_shp(self):
         r = requests.get("https://gadm.org/maps.html")
         htmlcontent = BeautifulSoup(r.content, "html.parser")
         countries = []
@@ -51,7 +51,7 @@ class shp_getter:
         GT = Geotag()
         place_names = []
 
-        for place in places:
+        for place in self.places:
             tag = place["geotag"]
             if (tag in GT.path2entry):
                 tag = GT.path2entry[tag]
@@ -60,17 +60,19 @@ class shp_getter:
         print(place_names)
 
         for place in place_names:
+            print(place)
             if place in country_codes.keys():
                 country = country_codes.get(place)
-                scrape(country)
+                self.scrape(country)
 
 
     def scrape(self, code):
         url = "https://biogeo.ucdavis.edu/data/gadm3.6/shp/gadm36_" + code + "_shp.zip"
 
-        urllib.request.urlretrieve(url, path + "/shp-zipped/" + code + "_shp.zip")
+        urllib.request.urlretrieve(url, self.path + "/shp-zipped/" + code + "_shp.zip")
         print(code)
-        zf = zipfile.ZipFile(path + "/shp-zipped/" + code + "_shp.zip")
+        zf = zipfile.ZipFile(self.path + "/shp-zipped/" + code + "_shp.zip")
 
-        zf.extractall(path + "/shp/")
+        zf.extractall(self.path + "/shp/")
+        print("extracted")
         zf.close()
