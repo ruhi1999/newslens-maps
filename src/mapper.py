@@ -11,10 +11,9 @@ import io
 from geopy.geocoders import Nominatim
 
 class mapper:
-    def __init__(self, topic):
+    def __init__(self, topic, topic_file):
         self.topic = topic
-        self.path = ("../data/initial-10/places_" + self.topic +".json")
-        place_file = open(self.path)
+        place_file = open(topic_file)
         self.place_data = json.load(place_file)
         self.geolocator = Nominatim(user_agent = "NewsLens")
 
